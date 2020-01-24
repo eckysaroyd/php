@@ -1,0 +1,253 @@
+/*header div*/
+.main
+{
+background-color:royalblue; 
+color:white; 
+height:90px; 
+width:100%; 
+float:left;
+}
+/*header div-name of our project*/
+.left
+{
+margin-left:100px;
+float:left;
+}
+/*header div-login page*/
+.right
+{
+margin-right:100px;
+float:right;
+}
+/*name of our project*/
+.headerspan
+{
+	margin-left:30px;
+	margin-top:20px;
+	background-color:yellow;
+	color:red;
+	border-radius:50%;
+	font-size:30px;
+	float:left;
+}
+/*name of our project*/
+.headerspan11
+{
+	margin-top:20px;
+	font-size:25px;
+	color:white;
+	background-color:royalblue;
+	float:left;
+}
+/*main div with-left picture and Create a new account*/
+.mainy
+{
+background-color:silver; 
+color:black; 
+height:auto; 
+width:100%; 
+float:left;
+}
+/*left div with picture*/
+.lef
+{
+background-color:silver; 
+color:black; 
+height:auto; 
+width:60%; 
+float:left;
+}
+.pic1
+{ 
+border-radius:20px;
+height:300px; 
+width:500px;
+margin-top:10px;
+margin-left:10px;
+}
+/*right div with Create a new account*/
+.rig
+{
+background-color:silver; 
+color:black; 
+height:auto; 
+width:40%; 
+float:right;
+}
+/* a (text)-form with firstname and surname*/
+.fbform
+{
+height:40px;
+width:200px;
+border-radius:5px;
+padding:4px;
+margin-top:10px;
+font-size:17px;
+}
+/* a (text)-form with email and password*/
+.fbform1
+{
+height:40px;
+width:400px;
+border-radius:5px;
+padding:4px;
+margin-top:10px;
+font-size:17px;
+}
+/* a (text)-form with submit button*/
+.button
+{
+height:40px;
+width:180px;
+background:#67ae55;
+border-radius:4px;
+padding:4px;
+margin-top:15px;
+font-size:18px;
+color:white;
+}
+/*its a class for only date input*/
+.day11
+{
+height:40px;
+width:60px;
+background-color:yellow;
+border-radius:4px;
+padding:4px;
+margin-top:15px;
+font-size:18px;	
+}
+/*homepage-IT IS START FROM OUR HOMEPAGE ALL CSS ARE INSIDE HERE*/
+.div1
+{
+background-color:royalblue; 
+color:white; 
+height:90px; 
+width:100%; 
+float:left;
+}
+/*homepage_left[side]*/
+.div2
+{
+float:left;	
+width:60%;
+}
+/*SEARCH BUTTON*/
+.search1
+{
+height:30px;
+width:300px;
+border-radius:5px;
+padding:4px;
+margin-top:10px;
+font-size:17px;
+}
+/*SEARCH SUBMIT-BUTTON*/
+.kaka
+{
+height:35px;
+width:90px;
+background-color:royalblue; 
+border-radius:4px;
+padding:4px;
+margin-top:10px;
+margin-left:0px;
+font-size:16px;
+color:white;
+}
+/*homepage_right[side]*/
+.div3
+{
+float:left;	
+width:40%;
+}
+/*profile picture*/
+img
+{
+	border-radius:50%;
+	width:50px;
+	height:50px;
+}
+/*profile name*/
+.prfl2
+{
+color:white;
+font-size:20px;
+margin-top:30px;
+}
+/*profile-<MESSAGE AND LOGOUT>*/
+.prfl23
+{
+color:white;
+font-size:20px;
+margin-left:10px;
+margin-top:30px;
+}
+/*ALL-link*/
+a{
+	text-decoration:none;
+}
+a:hover
+{
+	color:white;
+	background-color:royalblue; 
+}
+/*main div-<IT IS FOR MAIN ONE>*/
+.div4
+{
+background-color:silver; 
+color:black; 
+height:auto;
+width:100%; 
+float:left;
+padding: 15px;
+}
+/*main div-<IT IS FOR UPLOAD PICTURES ONLY>*/	
+.div5
+{
+background-color:white; 
+color:black; 
+height:300px; 
+width:500px; 
+float:left;
+margin-top:10px;
+margin-left:350px;
+border-radius:10px;
+}
+.text11
+{
+background-color:white; 
+color:black; 
+height:240px; 
+width:480px; 
+float:left;
+margin-top:10px;
+margin-left:10px;
+border-radius:10px;
+border:2px solid grey;
+}
+.upload1
+{
+height:35px;
+width:100px;
+background:#67ae55;
+border-radius:4px;
+padding:4px;
+margin-top:10px;
+margin-left:100px;
+font-size:18px;
+color:white;
+}
+
+/*main div-<IT IS FOR SHOWING UPLOADED PICTURES ONLY>*/
+.div6
+{
+background-color:white;
+color:black; 
+height:auto;  
+width:500px; 
+margin-left:350px;
+margin-top:10px;
+float:left;
+border-radius:10px;
+}
