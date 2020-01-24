@@ -1,0 +1,12 @@
+//1- this program is used to enter the number and print its alphabet
+
+set serveroutput on;
+DECLARE
+type ascii_nt is table of varchar2(20);
+v_ascii ascii_nt := ascii_nt(97,98,99,100,101);
+BEGIN
+FOR i IN v_ascii.FIRST ..v_ascii.LAST LOOP
+dbms_output.put_line(CHR(v_ascii(i)));
+END LOOP;
+END;
+/

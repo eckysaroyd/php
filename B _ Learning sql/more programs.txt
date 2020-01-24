@@ -1,0 +1,76 @@
+create table employee1 (ID int, Name varchar(50), Department varchar(50),
+salary int);
+insert into employee1 values(1,'Ahmad','IT',20000);
+insert into employee1 values(2,'Rohit','ACC',25000);
+insert into employee1 values(3,'Mohsin','MGT',15000);
+insert into employee1 values(4,'Atiq','IT',22000);
+insert into employee1 values(5,'Karan','BSC',10000);
+
+set serveroutput on;
+DECLARE
+type t_name is record
+( salary employee1.salary%type);
+r_name t_name;
+BEGIN
+select salary into r_name from employee1 where salary in
+(SELECT MAX(salary) FROM Employee1 WHERE Salary NOT IN ( SELECT Max(Salary) FROM Employee1));
+
+dbms_output.put_line('Salary : ' || r_name.salary);
+
+
+END;
+/ 
+
+----------------------
+same another way:
+set serveroutput on;
+declare
+type records is record
+( id abc_employes.id%type,
+name abc_employes.name%type,
+department abc_employes.department%type,
+salary abc_employes.salary%type
+);
+highest number;
+employee records;
+begin
+select max(salary) into highest from abc_employes;
+select * into employee from abc_employes where salary like (select max(salary) from abc_employes where salary<highest);
+dbms_output.put_line('Name :'|| employee.name);
+dbms_output.put_line('salary : ' || employee.salary;
+END;
+/
+
+----------------------------------------------------------------------------
+2- user defined record to fetch details of student whose name starts with letter a & ends with i and also
+has cgpa>7?
+
+create table student (ID int, Name varchar(50), CGPA float);
+insert into student values (1,'Karan',7.5);
+insert into student values (2,'Harish',6.5);
+insert into student values (3,'Mohsin',8.5);
+insert into student values (4,'Faredon',3.5);
+insert into student values (5,'Atiq',9.3);
+
+set serveroutput on;
+DECLARE
+type t_name is record
+(name student.name%type, 
+cgpa student.cgpa%type,  
+);
+r_name t_name;
+BEGIN
+select * into r_name from student where name in (select name from student where like('a%') and name like ('%i'); 
+
+dbms_output.put_line('Name :' || r_name.name);
+
+ENDS;
+/
+
+----------------------------------------------------------------------------------------------------
+Q-3 user defined record to fetch details of employee working in sales department & whose salary is less then 8000.
+
+
+
+
+

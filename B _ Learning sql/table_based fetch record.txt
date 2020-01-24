@@ -1,0 +1,39 @@
+create table record (ID int, Name nvarchar(20), Age int, Salary int);
+insert into record values(1,'ahmad',20,10000);
+insert into record values(2,'mohsin',18,12000);
+insert into record values(3,'amir',22,15000);
+insert into record values(4,'atiq',21,20000);
+insert into record values(5,'faredon',19,25000);
+
+
+//TO FETCH THE RECORD OF ID 5.
+set serveroutput on;
+DECLARE
+customer_rec record%rowtype;
+BEGIN
+select * into customer_rec from record where ID=5;
+dbms_output.put_line('Customer ID:' || customer_rec.id);
+dbms_output.put_line('Customer NAME:' || customer_rec.name);
+dbms_output.put_line('Customer AGE:' || customer_rec.age);
+dbms_output.put_line('Customer SALARY:' || customer_rec.salary);
+
+END;
+/
+
+----------------------------------------------------------------------------
+
+//FOR MAX SALARY
+set serveroutput on;
+DECLARE
+customer_rec record%rowtype;
+BEGIN
+select * into customer_rec from record where SALARY IN(SELECT MAX(SALARY) FROM RECORD);
+dbms_output.put_line('Customer ID:' || customer_rec.id);
+dbms_output.put_line('Customer NAME:' || customer_rec.name);
+dbms_output.put_line('Customer AGE:' || customer_rec.age);
+dbms_output.put_line('Customer SALARY:' || customer_rec.salary);
+
+END;
+/
+---------------------------------------------------------------------------
+//fetch the record which have double aa in the name.

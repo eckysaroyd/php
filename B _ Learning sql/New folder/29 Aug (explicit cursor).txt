@@ -1,0 +1,208 @@
+		Explicit Cursor
+1- this program is used to declare the explicit cursor?
+a- create a table (anyname) empid,empname,empage,empsalary,empdept?
+b- select the record of employee which works in deptno=5;
+
+create table employee(empid number, empname varchar2(20),empjob varchar(20), empdept number,salary number);
+insert into employee values(1,'Karan','Manager', 2,10000);
+insert into employee values(2,'Amrit','Accountant', 4,12000);
+insert into employee values(3,'Harish','Manager', 2,15000);
+insert into employee values(4,'RP','IT officer',6,6000);
+insert into employee values(5,'Mohsin','Accountant', 4,20000);
+insert into employee values(6,'Ahmad','Manager', 2,25000);
+insert into employee values(7,'Atiq','IT officer', 6,28000);
+insert into employee values(8,'Faredon','Accountant',4,35000);
+
+select * from employee;
+set serveroutput on;
+declare
+cursor c1 is select * from employee where empdept=2;
+rec c1%rowtype;
+begin
+open c1;
+loop
+fetch c1 into rec;
+exit when c1%notfound;
+dbms_output.put_line(' EmpID: ' || rec.empid);
+dbms_output.put_line('Emp Name: ' || rec.empname);
+dbms_output.put_line('Emp Job: ' || rec.empjob);
+dbms_output.put_line('Department: ' || rec.empdept);
+end loop;
+close c1;
+end;
+------------------------------------------------------------------------------
+2- using the for loop to fetch the record;
+-----------------------------------------------------------------------------
+
+3:- w.a.p to display empid,empname,salary of top 3 highiest paid employees using explicit users.
+
+create table employee(empid number, empname varchar2(20),empjob varchar(20), empdept number,salary number);
+insert into employee values(1,'Karan','Manager', 2,10000);
+insert into employee values(2,'Amrit','Accountant', 4,12000);
+insert into employee values(3,'Harish','Manager', 2,15000);
+insert into employee values(4,'RP','IT officer',6,6000);
+insert into employee values(5,'Mohsin','Accountant', 4,20000);
+insert into employee values(6,'Ahmad','Manager', 2,25000);
+insert into employee values(7,'Atiq','IT officer', 6,28000);
+insert into employee values(8,'Faredon','Accountant',4,35000);
+
+
+set serveroutput on;
+declare
+cursor c1 is SELECT ROWNUM as RANK, empid,empname,empjob,empdept 
+FROM (SELECT empid,empname,empjob,empdept
+      FROM employee
+      ORDER BY salary)
+WHERE ROWNUM<=3;
+rec c1%rowtype;
+begin
+open c1;
+loop
+fetch c1 into rec;
+exit when c1%notfound;
+dbms_output.put_line(' EmpID: ' || rec.empid);
+dbms_output.put_line('Emp Name: ' || rec.empname);
+dbms_output.put_line('Emp Job: ' || rec.empjob);
+dbms_output.put_line('Department: ' || rec.empdept);
+dbms_output.put_line('Salary : ' || rec.salary);
+end loop;
+close c1;
+end;
+
+
+
+
+
+-----------------------------------------------------------------------------------------------
+4- write a pl/sql code using cursor to increase salary of employee according to following rules:
+	1-salary of deptno 2 employees increased by 1000.
+	2-                 4                        500.
+	3.                 6                        800.
+
+note:= we will take two separate variable where we store the old salary in one variable then we perform the update and save the value in the new variable.
+
+create table employee(empid number, empname varchar2(20),empjob varchar(20), empdept number,salary number);
+insert into employee values(1,'Karan','Manager', 2,10000);
+insert into employee values(2,'Amrit','Accountant', 4,12000);
+insert into employee values(3,'Harish','Manager', 2,15000);
+insert into employee values(4,'RP','IT officer',6,6000);
+insert into employee values(5,'Mohsin','Accountant', 4,20000);
+insert into employee values(6,'Ahmad','Manager', 2,25000);
+insert into employee values(7,'Atiq','IT officer', 6,28000);
+insert into employee values(8,'Faredon','Accountant',4,35000);
+
+select * from employee;
+set serveroutput on;
+declare 
+oldsal number;
+newsal number;
+cursor c1 is select * from employee;
+rec c1%rowtype;
+begin
+open c1;
+loop
+fetch c1 into rec;
+exit when c1%notfound;
+select salary into oldsal from employee where empid=rec.empid;
+if rec.empdept=4 then
+update employee set salary=salary+1000 where empid=rec.empid;
+select salary into newsal from employee where empid=rec.empid;
+end if;
+if rec.empdept=2 then
+update employee set salary=salary+800 where empid=rec.empid;
+select salary into newsal from employee where empid=rec.empid;
+end if;
+if rec.empdept=6 then
+update employee set salary=salary+500 where empid=rec.empid;
+select salary into newsal from employee where empid=rec.empid;
+end if;
+insert into temp12 values(rec.empid,oldsal,newsal);
+end loop;
+close c1;
+end;
+/
+
+---------------------------------------------------------------------------------------
+
+Que: write a pl/sql code using explicit cursor such that it should fetch information from product table and provide discount:500 when the
+product range 1000,10% discount and update in table
+product range 1000-1500, 20% discount and update in table.
+create table product10 (prdid number, prdname nvarchar2(20), prdprice number);
+insert into product10 values(1,'Pen',300);
+insert into product10 values(2,'books',1100);
+insert into product10 values(3,'monitor',1300);
+insert into product10 values(4,'mouse',600);
+insert into product10 values(5,'speaker',900);
+
+declare 
+oldprice number;
+newprice number;
+cursor c1 is select * from product10;
+rec c1%rowtype;
+begin
+open c1;
+loop
+fetch c1 into rec;
+exit when c1%notfound;
+select prdprice into oldprice from product10 where prdid=rec.prdid;
+if rec.prdprice>500 and rec.prdprice<1000 then
+update product10 set prdprice=prdprice-(prdprice*0.10) where prdid=rec.prdid;
+select prdprice into newprice from product where prdid=rec.prdid;
+end if;
+if rec.prdprice>=1000 and rec.prdprice<1500 then
+update product set prdprice=prdprice-(prdprice*0.10) where prdid=rec.prdid;
+select prdprice into newprice from product10 where prdid=rec.prdid;
+end if;
+insert into newproduct values(rec.prdid,oldprice,newprice);
+end loop;
+close c1;
+end;
+/
+
+
+
+
+
+
+
+------------------------------------------------------------------------------------
+ Ques:  crate student table (reg, name, cgpa, course, section) add any 5 or more records
+Ques:- write a pl/sql code to count number of students scoring above 8 cgpa, and student scoring in range 5-8, and below 5 cgpa
+
+create table student(reg number, name nvarchar2(20), cgpa float,percentage float, section nvarchar2(20));
+insert into student values(11814711, 'Karan', 6.5,65, 'D1706');
+insert into student values(11814420, 'Karan', 7.6,77, 'D1706');
+insert into student values(11815330, 'Karan', 8.8,88, 'D1706');
+insert into student values(11815240, 'Karan', 4.4,43, 'D1706');
+insert into student values(11815850, 'Karan', 3.2,33, 'D1706');
+insert into student values(11814360, 'Karan', 8.0,80, 'D1706');
+insert into student values(11813370, 'Karan', 5.5,55, 'D1706');
+insert into student values(11812380, 'Karan', 7.0,70, 'D1706');
+
+declare
+cursor my_student is select * from student;
+student my_student%rowtype;
+count_80 number:=0;
+count_60_80 number:=0;
+count_40_60 number:=0;
+begin
+for student in my_student loop
+if(student.percentage>=80) then
+count_80:=count_80+1;
+end if;
+if(student.percentage>=60 and student.percentage<80) then
+count_60_80:=count_60_80+1;
+end if;
+if(student.percentage>=40 and student.percentage<60) then
+count_40_60:=count_40_60+1;
+end if;
+end loop;
+dbms_output.put_line('More than 80% students : ' || count_80);
+dbms_output.put_line('Between 60% and 80% : ' || count_60_80);
+dbms_output.put_line('Between 40% and 60% : ' || count_40_60);
+end;
+/
+
+
+
+

@@ -1,0 +1,126 @@
+To use methods of collection 
+
+set serverout on;
+
+DECLARE
+
+  TYPE names_typ IS TABLE OF VARCHAR2(30) INDEX BY binary_integer;
+  actor_names names_typ;
+
+BEGIN
+
+  actor_names(1):='Alok';
+  actor_names(2):='Chan';
+  actor_names(3):='Ankit';
+  actor_names(4):='Shahrukh';
+  actor_names(5):='Big B';
+  actor_names(6):='Nawaz';
+  actor_names(7):='Manoj';
+  actor_names(-1):='Raj Kumar';
+
+  dbms_output.put_line('Count = '||actor_names.count);
+  actor_names.DELETE(2);
+  dbms_output.put_line('Count = '||actor_names.count);
+  actor_names.DELETE(3,5);
+  dbms_output.put_line('Count = '||actor_names.count);
+  actor_names.DELETE;
+  dbms_output.put_line('Count = '||actor_names.count);
+
+END;
+=============================================================================================================================
+progrm to delete any index taken by user
+set serverout on;
+
+DECLARE
+
+  TYPE names_typ IS TABLE OF VARCHAR2(30) INDEX BY binary_integer;
+  actor_names names_typ;
+  n number;
+  temp varchar2(30);
+  i number;
+
+BEGIN
+
+  actor_names(1):='Alok';
+  actor_names(2):='Chan';
+  actor_names(3):='Ankit';
+  actor_names(4):='Shahrukh';
+  actor_names(5):='Big B';
+  actor_names(6):='Nawaz';
+  actor_names(7):='Manoj';
+  actor_names(-1):='Raj Kumar';
+
+  dbms_output.put_line('Count = '||actor_names.count);
+  n:=&Enter_index_to_deleted;
+  dbms_output.put_line(actor_names(n)||' is deleted');
+  actor_names.DELETE(n);
+  dbms_output.put_line('Count = '||actor_names.count);
+  
+  
+END;
+=============================================================================================================================
+To declare array manually enter array and print so called nested array
+
+set serverout on;
+
+DECLARE
+
+  TYPE names_table IS TABLE OF VARCHAR2(10);
+  TYPE grades IS TABLE OF integer;
+  names names_table;
+  marks grades;
+  total integer;
+
+BEGIN
+
+  names:=names_table('Alok','Chan','Ankit','Shahrukh','Big B','Nawaz','Manoj','Raj Kumar');
+  marks:=grades(87,98,76,91,82,56,85,49);
+  total:=names.count;
+
+  dbms_output.put_line('Total Students = '||total);
+  for i in 1..total LOOP
+    dbms_output.put_line('Student '||names(i)||'  Marks : '||marks(i));
+  end loop;
+  
+  
+END;
+
+=============================================================================================================================
+to print at index 1 using extend 
+
+set serverout on;
+
+DECLARE
+
+  TYPE nested_table IS TABLE OF number;
+  nt_obj nested_table:=nested_table();
+
+BEGIN
+
+  nt_obj.EXTEND;
+  nt_obj(1):=10;
+  dbms_output.put_line('Data at index 1 is '||nt_obj(1));
+    
+END;
+=============================================================================================================================
+
+set serverout on;
+
+DECLARE
+
+  TYPE nested_table IS TABLE OF number;
+  nt_obj nested_table:=nested_table();
+
+BEGIN
+
+  nt_obj.EXTEND(3);
+  nt_obj(1):=10;
+  nt_obj(2):=20;
+  nt_obj(3):=30;
+  dbms_output.put_line('Data at index 1 is '||nt_obj(1));
+  dbms_output.put_line('Data at index 2 is '||nt_obj(2));
+  dbms_output.put_line('Data at index 3 is '||nt_obj(3));
+    
+END;
+
+=============================================================================================================================

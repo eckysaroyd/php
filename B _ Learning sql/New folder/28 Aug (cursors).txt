@@ -1,0 +1,84 @@
+		Cursors(Implicitly)
+1- consider a pl/sql code to display a message to check whether the record is deleted or not.
+
+	first create a table with some records.
+create table lpu(ID number, Name nvarchar2(20), Age number, salary number);
+insert into lpu values (1,'karan',18,10000);
+insert into lpu values (2,'Harish',20,15000);
+insert into lpu values (3,'RP',18,18000);
+insert into lpu values (4,'Sarwar',22,12000);
+insert into lpu values (5,'Mohsin',23,9000);
+insert into lpu values (6,'Amrit',17,6000);
+
+Not found :- if the id is not found 
+
+set serveroutput on;
+begin
+delete lpu where id=&id;
+if sql%notfound then
+dbms_output.put_line('Record not deleted');
+else
+dbms_output.put_line('Record deleted');
+end if;
+end;
+/
+
+---------------------------------------------------------------
+found:- if the id is found delete the record.
+
+set serveroutput on;
+begin
+delete lpu where id=&id;
+if sql%found then
+dbms_output.put_line('Record deleted');
+else
+dbms_output.put_line('Record not deleted');
+end if;
+end;
+/
+
+
+-------------------------------------
+Ques 2: %rowcount : it show that how many rows are going to affect.
+
+
+set serveroutput on;
+declare
+n number;
+begin
+delete lpu where id=&id;
+n:=sql%rowcount;
+dbms_output.put_line('total number of records deleted' || n);
+end;
+/
+
+-----------------------------------------
+update
+
+set serveroutput on;
+declare
+n number;
+begin
+UPDATE lpu SET salary=salary + 500 where salary>8000;
+n:=sql%rowcount;
+dbms_output.put_line('total number of records updated' || n);
+end;
+/
+
+
+--------------------------------------------------------------------------
+wap to take input of name from user and update the salary for that name.
+
+select * from lpu;
+set serveroutput on;
+declare
+n number;
+begin
+update lpu set salary=salary+500 where name='&name';
+n:=sql%rowcount;
+dbms_output.put_line('The updated record is = ' || n);
+end;
+/
+
+
+

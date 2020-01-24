@@ -1,0 +1,73 @@
+set serveroutput on;
+create or replace trigger baba 
+after insert  on ashish
+for each row
+when(new.id>0)
+begin
+dbms_output.put_line(' i love you ');
+end; 
+
+***********************************************************************************************************
+
+/*create a triggeer for a table which should make
+entry and create same coulmn in upper case*/
+
+create or replace trigger up_trig0123
+before update or insert on ash012
+for each row
+begin
+:new.name := upper(:new.name);
+dbms_output.put_line('TRIGGER OPEN');
+end;
+
+************************************************************************************************************
+/*create a trigger for a table which shows old values and new values of name after updation of name column in the table*/
+
+create or replace trigger up_trig0
+after update or insert on ash012
+for each row
+begin
+dbms_output.put_line(:new.name);
+dbms_output.put_line(:old.name);
+dbms_output.put_line('TRIGGER OPEN');
+end;
+
+
+
+update ash012
+set name='ram'
+where id=1;
+
+*************************************************************************************************
+/*create trigger on a table which stores the empno & operation performed be insert , udate , delete each time something update deleted or inserted*/
+
+//updated value
+
+create table ash012up(id int, operation varchar(100) );
+
+
+create or replace trigger ashtrig
+after  update or insert or delete on ash012
+for each row
+begin
+if inserting  then
+insert into ash012up values(:new.id ,'INSERTING');
+end if;
+if updating  then
+insert into ash012up values(:new.id , 'UPDATE');
+end if;
+if deleting  then
+insert into ash012up values(:old.id  ,'DELETING');
+end if;
+
+end;
+
+update ash012
+set name='dgfagda'
+where id=1;
+
+delete from ash012up where name =1;
+
+select * from ash012up;
+
+*******************************************************************************************************

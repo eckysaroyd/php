@@ -1,0 +1,17 @@
+create table student (st_id integer, st_name varchar2(20),address varchar2(20));
+insert into student values(1,'Mohsin','Logar');
+insert into student values(2,'Atiq','Kunduz');
+insert into student values(3,'Faredon','Nangarhar');
+insert into student values(4,'bilal','Kunar');
+insert into student values(5,'Sarwar','kabul');
+select * from student;
+
+declare
+student_rec student%rowtype;
+begin
+select * into student_rec from student where st_id=3;
+dbms_output.put_line('ID ' || student_rec.st_id);
+dbms_output.put_line('Name ' || student_rec.st_name);
+dbms_output.put_line('Address ' || student_rec.address);
+end;
+/

@@ -1,0 +1,95 @@
+		Objects:
+Ques:1:- create the object and initialize the value?
+create or replace type student50 as object
+(first_name nvarchar2(20), Last_name nvarchar2(20), course nvarchar2(20), father_name nvarchar2(20), registration_no number);
+
+declare
+info student50;
+begin
+info := student50('Supriya','Khanna','MCA','Java',11815938);
+dbms_output.put_line('First Name : ' || info.first_name);
+dbms_output.put_line('Last Name : ' || info.Last_name);
+dbms_output.put_line('Course  : ' || info.course);
+dbms_output.put_line('Father Name : ' || info.father_name);
+dbms_output.put_line('Registration No : ' || info.registration_no);
+end;
+/
+
+--------------------------------------------------------------------
+Ques:2:- another object which take input from the user?
+
+
+create or replace type emp50 as object
+(id number,name nvarchar2(20),job nvarchar2(20),salary number);
+
+set serveroutput on;
+declare 
+info emp50;
+begin
+info := emp50(&id,&name,&job,&salary);
+dbms_output.put_line('ID : ' || info.id);
+dbms_output.put_line('Name : ' || info.name);
+dbms_output.put_line('Job : ' || info.job);
+dbms_output.put_line('Salary : ' || info.salary);
+end;
+/
+
+----------------------------------------------------------------------------------------
+Ques:3:- create the object to use member procedure?
+
+	a)one object create:
+
+create type address_type as object
+(
+   street varchar2(30),
+   city  varchar2(20),
+   state varchar2(20),
+   postal_code varchar2(6)
+);
+/
+
+	b)another object create:
+
+create type employee_type as object
+(
+    employee_id number(6),
+    first_name varchar2(20),
+    last_name varchar2(25),
+    email  varchar2(25),
+    phone_number varchar2(20),
+    hire_date DATE,
+    address address_type,
+
+  map member function get_idno return number,
+  member procedure display_address(self in out nocopy employee_type)
+);
+/
+
+
+create type body employee_type as
+map member function get_idno return number is
+begin
+return employee_id;
+end;
+member procedure display_address(self in out nocopy employee_type) is
+begin
+dbms_output.put_line(first_name || ' ' || last_name);
+dbms_output.put_line(address.street);
+dbms_output.put_line(address.city || ',' || address.state || ' ' || address.postal_code);
+end;
+end;
+/
+
+set serveroutput on;
+declare 
+emp employee_type;
+begin
+emp := employee_type(315,'Francis','Logan','Flogan','415.555.0100','01-MAY-04', address_type('376 Mission', ' San Francisco', 'CA','94222'));
+dbms_output.put_line(emp.first_name || ' ' || emp.last_name);
+emp.display_address();
+end;
+/
+
+
+
+

@@ -1,0 +1,40 @@
+2-wap pl/sql code for demonstrating use of %rowtypes in records.
+declare
+type n_rec is record
+new n_rec:= n_rec.std1%rowtype;
+begin
+select * into n_rec from std1 where st_id=2;
+dbms_output.put_line(' ID : ' || n_rec.st_id);
+dbms_output.put_line(' Name : ' || n_rec.st_name);
+dbms_output.put_line(' Age : ' || n_rec.st_age);
+end;
+/
+
+
+
+
+
+
+
+1- wap a pl/sql code for a varray having 15 elements take input of the choice a
+a) print the sum of elements which are multiples of 2 and 5.
+b) find the smallest element and print its multiplication table in proper format.
+c) Replace the even elements with 2.
+
+Ans:- declare
+type v_array is varray(15) of binary_integer(2);
+value v_array:= v_array(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15);
+begin
+case
+for i in 1..15 loop
+if value is mod=2 or mod=5 then
+dbms_output.put_line( ' The sum: ' || value(i));
+end if;
+end loop;
+case
+for i in 1..15 loop
+ 
+
+
+
+

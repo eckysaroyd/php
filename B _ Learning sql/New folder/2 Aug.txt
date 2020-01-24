@@ -1,0 +1,152 @@
+Date 2nd August
+
+========================================================================================================================
+
+TO PRINT 1 TO 10
+
+set serverout on;
+begin
+  for I in 1..10 loop
+    dbms_output.put_line(i||'  ');
+  end loop;
+end;
+
+========================================================================================================================
+
+to print even 
+
+declare
+  n number:=0;
+begin
+  loop
+     n:=n+2;
+     dbms_output.put_line (n||',');
+     exit when n>=20;
+  end loop;
+end;
+
+========================================================================================================================
+
+to print odd
+
+declare
+  n number:=1;
+begin
+  loop
+     n:=n+2;
+     dbms_output.put_line (n||',');
+     exit when n>=20;
+  end loop;
+end;
+
+========================================================================================================================
+
+declare
+  n_counter number:=0;
+begin
+  loop
+     n_counter:=n_counter+1;
+     dbms_output.put_line (n_counter||',');
+     exit when n_counter=5;
+  end loop;
+end;
+
+========================================================================================================================
+
+factorial
+
+set serveroutput on
+declare
+  n_counter number:=6;
+  n_factorial number:=1;
+  n_temp number;
+begin
+  n_temp:=n_counter;
+  while n_counter>0
+  loop
+    n_factorial:=n_factorial*n_counter;
+    n_counter:=n_counter-1;
+  end loop;
+  dbms_output.put_line('factorial of '||n_temp ||' is ' ||n_factorial);
+end;
+
+========================================================================================================================
+
+wap to check if a number is even or odd if even find its factorial else print its table;
+
+set serveroutput on
+declare
+  n number;
+  f number:=1;
+begin
+  n:=&Enter_the_value;
+  if(n mod 2=0) then
+    if(n>0) then
+     for i in 1..n loop
+       f:=f*i;
+     end loop;
+    end if;
+    dbms_output.put_line('factorial is '||f);
+  else
+    for i in 1..10 loop
+      dbms_output.put_line(n||'  X  '||i||' = '||n*i);
+    end loop;
+  end if;
+end;
+
+========================================================================================================================
+
+Check if a number is palindrome
+
+set serveroutput on
+declare
+  n number;
+  org number;
+  rev number:=0;
+  d number;
+begin
+  n:=&Enter_the_value;
+  org:=n;
+  while n != 0
+   loop
+    d:=n mod 10;
+    rev:=(rev*10)+d;
+    n:=trunc(n/10);
+   end loop;
+  if(org=rev)then
+    dbms_output.put_line(org||' is palindrome ');
+  else
+    dbms_output.put_line(org||' is not palindrome ');
+  end if;
+end;
+
+
+========================================================================================================================
+
+ switch case
+giving grade according marks
+
+set serveroutput on
+declare
+  n number;
+  g varchar2(30);
+begin
+  n:=&Enter_the_value;
+  case
+   when n>=35 and n<40 then
+     g:='D';
+   when n>=40 and n<60 then
+     g:='C';
+   when n>=60 and n<80 then
+     g:='B';
+   when n>=80 and n<90 then
+     g:='B+';
+   when n>=90 and n<101 then
+     g:='A+';
+   else
+     g:='R';
+   end case;
+   dbms_output.put_line(g||' is the grade of student having '||n||' marks');
+end;
+
+========================================================================================================================

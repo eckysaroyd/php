@@ -1,0 +1,163 @@
+Record by table data using record variable
+
+set serveroutput on;
+declare
+  cust_rec alok%rowtype;
+begin
+  SELECT * into cust_rec FROM alok where id=2;
+  dbms_output.put_line('ID = '||cust_rec.id);
+  dbms_output.put_line('Name= '||cust_rec.name);
+  dbms_output.put_line('Age = '||cust_rec.age);
+  dbms_output.put_line('Salary= '||cust_rec.salary);
+end;
+
+=================================================================================================================================================================
+Record by table data using record variable taking max salary
+
+set serveroutput on;
+declare
+  cust_rec alok%rowtype;
+begin
+  SELECT * into cust_rec FROM alok where salary=(select max(salary) from alok);
+  dbms_output.put_line('ID = '||cust_rec.id);
+  dbms_output.put_line('Name= '||cust_rec.name);
+  dbms_output.put_line('Age = '||cust_rec.age);
+  dbms_output.put_line('Salary= '||cust_rec.salary);
+end;
+
+===============================================================================================================================================================
+
+Record by table data using record variable taking name like %a%a%
+
+set serveroutput on;
+declare
+  cust_rec alok%rowtype;
+begin
+  SELECT * into cust_rec FROM alok where name=(select name from alok where name like '%a%a%');
+  dbms_output.put_line('ID = '||cust_rec.id);
+  dbms_output.put_line('Name= '||cust_rec.name);
+  dbms_output.put_line('Age = '||cust_rec.age);
+  dbms_output.put_line('Salary= '||cust_rec.salary);
+en==============================================================================================================================================================
+
+using record variable and printing the data with instant initialization
+
+set serveroutput on;
+declare
+   type College is record
+  (firstname varchar2(20),
+   lastname varchar2(20),
+   subject varchar2(20),
+   id number);
+ 
+   course1 College;
+   course2 College;
+
+begin
+   course1.firstname:='Alok';
+   course1.lastname:='Raj';
+   course1.subject:='Maths';
+   course1.id:=7670;
+
+   course2.firstname:='Jeet';
+   course2.lastname:='Awasthi';
+   course2.subject:='Comp';
+   course2.id:=5647;
+
+   dbms_output.put_line('Record 1');
+   dbms_output.put_line('Name : '||course1.firstname||' '||course1.lastname);
+   dbms_output.put_line('Subject : '||course1.subject);
+   dbms_output.put_line('ID : '||course1.id);
+
+   dbms_output.put_line('_____________________');
+   dbms_output.put_line('Record 2');
+   dbms_output.put_line('Name : '||course2.firstname||' '||course2.lastname);
+   dbms_output.put_line('Subject : '||course2.subject);
+   dbms_output.put_line('ID : '||course2.id);
+end;
+
+==================================================================================================================================================================
+
+
+printing the id=2 name using record variable
+
+set serveroutput on;
+declare
+   type t_name is record
+  (name Alok.name%type);
+ 
+   r_name t_name;
+   n_emp_id alok.id%type:=3;
+
+begin
+   select name into r_name from Alok where id=n_emp_id;
+   dbms_output.put_line(r_name.name);
+end;
+
+
+=============================================================================================================================================================
+
+create a user defined record which should be able to fetch details of an employee whose getting the second highest salary
+
+set serveroutput on;
+declare
+   type t_sal is record
+  (salary Alok.salary%type);
+ 
+   r_sal t_sal;
+   
+
+begin
+   select salary into r_sal from Alok where salary=(SELECT MAX(salary) FROM alok WHERE salary NOT IN ( SELECT Max(Salary) FROM alok));
+   dbms_output.put_line(r_sal.salary);
+end;
+
+==============================================================================================================================================================
+
+create a user defined record which should be able to fetch all details of an employee whose getting the second highest salary 
+
+set serveroutput on;
+declare
+   type t_sal is record
+  (id Alok.id%type,
+   name Alok.name%type,
+   age Alok.age%type,
+   salary Alok.salary%type);
+ 
+   r_sal t_sal;
+   sal number;
+   
+
+begin
+   select salary into sal from Alok where salary=(SELECT MAX(salary) FROM alok WHERE salary NOT IN ( SELECT Max(Salary) FROM alok));
+   select * into r_sal from Alok where salary=sal;
+   dbms_output.put_line('Second highest = '||sal);
+   dbms_output.put_line('Id = '||r_sal.id);
+   dbms_output.put_line('Name = '||r_sal.name);
+   dbms_output.put_line('Age= '||r_sal.age);
+   dbms_output.put_line('Salary= '||r_sal.salary);
+end;
+
+==============================================================================================================================================================
+
+ user defined record to fetch details of student whose name starts with letters A & end in i and aslo has CGPA > 7
+
+set serveroutput on;
+declare
+  type rec is record(id stud07.id%type, name stud07.name%type, cgpa stud07.cgpa%type);
+  
+  det rec;
+  st varchar2(30);
+
+begin
+
+  select name into st from stud07 where name like 'A%i' and cgpa>7;
+  select * into det from stud07 where name=st;
+  dbms_output.put_line('Required student = '||st);
+  dbms_output.put_line('Id = '||det.id);
+  dbms_output.put_line('Name = '||det.name);
+  dbms_output.put_line('CGPA = '||det.cgpa);
+end;
+
+===============================================================================================================================================================
+

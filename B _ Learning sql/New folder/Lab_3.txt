@@ -1,0 +1,85 @@
+			Set-B
+
+Ans-2
+
+create table inventory10(id number,product nvarchar2(20),price number,retailername nvarchar2(20));
+
+insert into inventory10 values(1,'book',1000,'karan');
+insert into inventory10 values(2,'Pen',600,'Harish');
+insert into inventory10 values(3,'Notebook',1200,'Pranam');
+insert into inventory10 values(4,'mobile',5000,'Amrit');
+insert into inventory10 values(5,'Printer',3000,'karan');
+
+
+create table invent(id number, operation nvarchar2(20);
+
+create or replace trigger trig_inven
+after  update or insert or delete on inventory10
+for each row
+begin
+if deleting  then
+insert into invent values(:old.id  ,'DELETING');
+end if;
+end;
+/
+
+delete from inventory10 where id=3;
+select * from inventory10;
+select * from invent;
+
+------------------------------------------------------------------------------
+
+create table student20 (id number, name nvarchar2(20),age number);
+
+insert into student20 values(1 ,'Ahmad',18);
+insert into student20 values(2 ,'Karan',20);
+insert into student20 values(3 ,'Harish',17);
+insert into student20 values(4 ,'Amrit',22);
+insert into student20 values(5 ,'Mohsin',24);
+
+create or replace function disp_age(std_id in number)
+return number is
+in_age number :=0;
+begin
+select age into in_age from student20 where id=std_id;
+return in_age;
+end;
+/
+
+select * from student20;
+set serveroutput on;
+declare 
+get_age number;
+begin
+get_age := disp_age(&id);
+dbms_output.put_line('The age of the student is : ' || get_age);
+end;
+/
+
+
+3- 
+create or replace function charac(st_char nvarchar2)
+return nvarchar2 is 
+in_char nvarchar2(20);
+begin
+select count(name) into in_char from student where id=st_char;
+return in_char;
+end;
+/
+
+set serveroutput on;
+declare
+get_char nvarchar2(20);
+begin
+get_char :=length('khan');
+dbms_output.put_line('The characters are : ' || get_char);
+end;
+/
+
+
+
+
+
+
+
+

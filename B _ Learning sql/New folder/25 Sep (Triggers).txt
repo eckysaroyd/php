@@ -1,0 +1,145 @@
+Triggers in PL/SQL?
+1- what is triggers?
+ans:- 
+
+
+
+
+
+create table employee(id number, name nvarchar2(20),city nvarchar2(20),salary number);
+
+insert into employee values(1,'Ahmad','Delhi',10000);
+insert into employee values(2,'Karan','Shimla',13000);
+insert into employee values(3,'Harish','chandigarh',9000);
+
+
+create or replace trigger emp_trig
+before insert or update or delete on employee
+for each row
+when (new.id>0)
+begin
+dbms_output.put_line('Trigger invoked');
+end;
+
+begin
+update employee set salary=salary+500 where id=&id;
+end;
+
+
+
+----------------------------------------------------------------------
+Que:2:- create a trigger which should be invoked everytime someone update,insert on table customer, store the old and new value of customer and 
+	display the difference of old and new salary.
+
+create or replace trigger trig_emp
+after insert or update or delete on employee
+for each row
+when (new.id>0)
+declare
+sal_diff number;
+begin
+sal_diff := :new.salary - :old.salary;
+dbms_output.put_line('Old salary = ' || :old.salary);
+dbms_output.put_line('new salary = ' || :new.salary);
+dbms_output.put_line('Salary difference is = ' || sal_diff);
+end;
+
+
+set serveroutput on;
+begin
+update employee set salary=salary+1000 where id=&id;
+end;
+/
+
+
+-------------------------------------------------------------------------------------------------------------------------
+
+Qus:3:- create a trigger for a table, which should make entry in name column in uppercase?
+
+create table student123(id number, name nvarchar2(20),city nvarchar2(20));
+
+create or replace trigger std_trig
+before insert or update on student123
+for each row
+begin
+:new.name:=upper(:new.name);
+end;
+
+select * from student123;
+insert into student123 values(1,'ahmad','jalandhar');
+
+----------------------------------------------------------------------------------
+Ques:4 create a trigger for a table which shows old values & new values of name after updation on name column in the table
+
+create or replace trigger upd_trig
+before insert or update on student123
+for each row
+begin
+dbms_output.put_line('old name =  ' || :old.name );
+dbms_output.put_line('new name = ' || :new.name);
+end;
+
+select * from student123;
+update student123 set name='harish' where id=1;
+
+-----------------------------------------------------------------------------------------------
+
+Qus:5:- create a trigger on a table which stores the empno & operation performed insert, update,delete each time something is inserted,
+ updated or deleted.
+
+1-first table
+
+create table employee(id number, name nvarchar2(20),city nvarchar2(20), salary number);
+insert into employee values(1,'ahmad','kabul',10000);
+insert into employee values(2,'karan','punjab',12000);
+insert into employee values(3,'harish','haryana',15000);
+insert into employee values(4,'ankit','delhi',9000);
+insert into employee values(5,'mohsin','logar',5000);
+
+2- second table
+
+create table empup(id number, operation nvarchar2(20));
+
+
+create or replace trigger trig_emp
+after insert or update or delete on employee
+for each row
+begin
+if inserting then
+insert into empup values(:new.id , 'INSERTING');
+end if;
+if updating then
+insert into empup values(:new.id , 'UPDATING');
+end if;
+if deleting then
+insert into empup values(:new.id , 'DELETING');
+end if;
+end;
+/
+
+set severoutput on;
+begin
+insert into employee values(6,'pranam','jalandhar',4000);
+end;
+
+delete from employee where id=6;
+update employee set salary=3000 where id=6;
+
+
+select * from empup;
+select * from employee; 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

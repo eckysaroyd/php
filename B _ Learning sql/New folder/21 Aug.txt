@@ -1,0 +1,119 @@
+VARRAY :- In this array we are giving the ascii code and print the alphabet from A upto Z.
+
+
+set serveroutput on;
+DECLARE
+type ascii_vt is varray(26) of varchar2(20);
+v_ascii ascii_vt := ascii_vt(65,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90);
+BEGIN
+for i IN v_ascii.FIRST..v_ascii.LAST LOOP
+dbms_output.put_line(chr(v_ascii(i)));
+end loop;
+end;
+/
+
+-------------------------------------------------------------------------------------
+Q:1:- take a Varray of any 20 numbers, print only those numbers which are multple of 4.
+set serveroutput on;
+DECLARE 
+type new_vt is varray(20) of number(25);
+v_new new_vt := new_vt(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20);
+BEGIN
+for i IN 1..20 LOOP
+if v_new (i) MOD 4=0 THEN
+dbms_output.put_line(v_new(i));
+end if;
+end loop;
+end;
+/
+------------------------------------------------------------------------------------------------
+Q:2:- Take a Varray with 2 elements, increase the size of Varray using external method upto 10 elements?
+set serveroutput on;
+declare
+type v_new is varray(2) of number(2);
+new v_new :=v_new(1,2);
+begin
+new.extend(10);
+new(1):=1;
+new(2):=2;
+new(3):=3;
+new(4):=4;
+new(5):=5;
+new(6):=6;
+new(7):=7;
+new(8):=8;
+new(9):=9;
+new(10):=10;
+dbms_output.put_line('Data in index 1 is ' || new(1));
+dbms_output.put_line('Data in index 2 is ' || new(2));
+dbms_output.put_line('Data in index 3 is ' || new(3));
+dbms_output.put_line('Data in index 4 is ' || new(4));
+dbms_output.put_line('Data in index 5 is ' || new(5));
+dbms_output.put_line('Data in index 6 is ' || new(6));
+dbms_output.put_line('Data in index 7 is ' || new(7));
+dbms_output.put_line('Data in index 8 is ' || new(8));
+dbms_output.put_line('Data in index 9 is ' || new(9));
+dbms_output.put_line('Data in index 10 is ' || new(10));
+
+end;
+/
+
+
+------------------------------------------------------------------------------------------------
+Q:3:- take a varray of 15 elements. ask if user input, if user enter 1-find minimum element or 2-find maximum element?
+declare
+type nums is varray(10) of varchar(2);
+my_nums nums:=(10,15,16,18,25,37,59,45,50,23);
+choice number:=&1_for_min_2_for_max;
+min_max number:=my_nums(1);
+even_sum number:=0;
+begin
+if(choice=2) then
+for i in my_nums.first .. my_nums.last loop
+if(my_nums(i)>min_max) then
+min_max:=my_nums(i);
+end if;
+end loop;
+end if;
+
+if(choice=1) then
+for i in my_nums.first .. my_nums.last loop
+if(my_nums(i)<min_max)then
+min_max:=my_nums(i);
+end if;
+end loop;
+end if;
+
+end;
+/
+
+
+
+------------------------------------------------------------------------------------------------------
+Q:2:- find the sum of even element of varray?
+set serveroutput on;
+DECLARE
+type sum_v is varray(20) of number(20);
+num sum_v is
+
+
+
+-----------------------------------------------------------------------
+Q:3:- Replace all the multiple of 3 with 1 and rest of the elements with 0 in a varray?
+
+-------------------------------------------------------------------------------
+Q:4:- we have already created table and fetch the data from the table?
+Ans:
+DECLARE
+type names_at is table of varchar2(50) index by binary_integer;
+v_names names_at;
+BEGIN
+for i in 1..3 loop
+select Name into v_names(i) from employee where ID=1;
+end loop;
+for i in 1..3 loop
+dbms_output.put_line(v_names(i));
+end loop;
+end;
+/
+

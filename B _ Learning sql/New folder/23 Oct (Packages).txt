@@ -1,0 +1,164 @@
+Question:-1 :- write a program for creating a package
+	a) totalsum--> to find sum of all salaries given to employees in employetable.
+	b) countdigit--> To pass a number as a parameter, count no of digits present.
+
+create table emp(id number,name nvarchar2(20),salary number);
+
+insert into emp values(1,'Karan',4000);
+insert into emp values(2,'Harish',6000);
+insert into emp values(3,'Amrit',10000);
+insert into emp values(4,'Mohsin',2000);
+insert into emp values(5,'Sarwar',12000);
+
+	Package specification
+
+create or replace package calculation as
+procedure total_sum(e_id emp.id%type);
+function charac(digit number);
+end calculation;
+/ 
+
+create or replace package body calculation as 
+procedure total_sum(e_id emp.id%type) is
+e_sal emp.salary%type;
+begin 
+select sum(salary) into e_sal from emp;
+dbms_output.put_line('Salary : ' || e_sal);
+end total_sum;
+
+	Second function:
+
+function countdigit(digit number)
+return number is 
+in_num number;
+begin
+select count(salary) into in_num from emp where id=st_salary;
+return in_num;
+end countdigit;
+end calculation;
+/
+
+
+
+
+declare 
+code emp.id%type;
+begin 
+calculation.total_sum(code);
+end;
+/
+
+set serveroutput on;
+declare
+get_num number;
+begin
+get_num :=length(150);
+dbms_output.put_line('The digits are : ' || get_num);
+end;
+/
+---------------------------------------------------------------------------------------------
+Ques:-1 create a table Bank(Accountno, AccountHolder, Balance, Manager, City)
+
+	create a package Banking10:
+   a) Function check_balance ---> pass accountno. as parameter to check the balance.
+   b) Procedure deposit ---> update the balance with the amount passed as parameter for accountno. passed as parameter.
+   c) Procedure withdraw ---> deduct the amount passed as a parameter for a particular accountno, if no sufficient balance is there, display suitable 				message
+	create table Bank1:
+create table Bank1 (Accountno number, AccountHolder nvarchar2(20), Balance number, Manager nvarchar2(20), City nvarchar2(20));
+
+insert into Bank1 values(112201,'Karan',10000,'Mohsin','jalandhar');
+insert into Bank1 values(112202,'Harish',8000,'Sarwar','Phagwara');
+insert into Bank1 values(112203,'Amrit',15000,'Faredon','Chandigarh');
+insert into Bank1 values(112204,'Ankit',20000,'Mohsin','jalandhar');
+insert into Bank1 values(112205,'RP',6000,'Sarwar','Phagwara');
+
+
+		Package specification:
+
+create or replace package Banking10 as
+	function check_balance
+	   (acc_no in Bank1.Accountno%type)
+	   return Bank1.balance%type;
+	procedure deposit
+	   (acc_no in Bank1.Accountno%type, amount in Bank1.balance%type);
+	procedure withdraw
+	   (acc_no in Bank1.Accountno%type, amount in bank1.balance%type);
+end;
+/
+
+
+create or replace package body Banking10 as
+   function check_balance
+	   (acc_no in Bank1.Accountno%type)
+	   return Bank1.balance%type is
+	   acct_balance Bank1.balance%type;
+	begin
+	  select balance into acct_balance from Bank1
+	  where Accountno = acc_no;
+	  return acct_balance;
+	end;
+
+  procedure deposit
+	(acc_no in Bank1.Accountno%type, amount in Bank1.balance%type)
+	is
+	begin
+	if(amount <= 0) then
+	   dbms_output.put_line('Wrong amount');
+	else update Bank1
+	      set balance = balance + amount where Accountno = acc_no;
+	end if;
+   end;
+
+ procedure withdraw
+	(acc_no in Bank1.Accountno%type, amount in Bank1.balance%type)
+	is
+	acct_balance Bank1.balance%type;
+     begin
+	acct_balance := check_balance(acc_no);
+	if (amount >acct_balance) then
+	  dbms_output.put_line('Insufficient fund.');
+  else update Bank1
+	  set balance = balance - amount
+	  where Accountno = acc_no;
+     end if;
+  end;
+end;
+/
+
+
+program:
+
+set serveroutput on;
+declare
+a number;
+b number;
+acnum Bank1.Accountno%type;
+amnt Bank1.balance%type;
+begin
+acnum := &enter_account_number;
+amnt := &enter_amount;
+a:=Banking10.check_balance(ecnum);
+dbms_output.put_line('balance is ' || a);
+Banking10.deposit(acnum,amnt);
+Banking10.withdraw(acnum,amnt);
+end;
+/
+
+
+
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

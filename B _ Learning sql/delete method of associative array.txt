@@ -1,0 +1,36 @@
+
+//3. collection method cout with delete,delete(n),delete(n,m)
+
+set serveroutput on;
+
+DECLARE
+type names_type is table of varchar2(10) index by binary_integer;
+actor_names names_type;
+BEGIN
+actor_names(1):='Chris';
+actor_names(2):='Steve';
+actor_names(3):='Kate';
+actor_names(4):='Stomai';
+actor_names(5):='Peter';
+actor_names(6):='Philip';
+actor_names(7) :='Michael';
+actor_names(8):='Gary';
+
+dbms_output.put_line('COUNT:' || actor_names.count);
+actor_names.delete(2);
+dbms_output.put_line('COUNT: ' || actor_names.count);
+actor_names.delete(3,5);
+dbms_output.put_line('COUNT:' || actor_names.count);
+actor_names.delete;
+dbms_output.put_line('COUNT:' || actor_names.count);
+
+end;
+/
+
+
+------------------------------------------------------------------------
+
+Ques :- write a program to take input of a subscript from user and delete its corresposding element?
+
+
+

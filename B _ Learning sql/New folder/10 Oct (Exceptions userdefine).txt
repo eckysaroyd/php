@@ -1,0 +1,196 @@
+		Exception:
+user defined exception. we can create an exception?
+
+This program raise an exception when the salary is null?
+
+create table emp10(id number,name nvarchar2(20),salary number);
+insert into emp10 values(1,'ahmad',null);
+insert into emp10 values(2,'karan',1000);
+insert into emp10 values(3,'mohsin',1200);
+insert into emp10 values(4,'atiq',null);
+
+
+set serveroutput on;
+declare
+v_bonus number;
+null_bonus_alert exception;
+begin
+select salary into v_bonus from emp10 where id=1;
+if v_bonus is null then
+raise null_bonus_alert;
+end if;
+exception
+when null_bonus_alert then
+dbms_output.put_line('This employee really should get a bonus!');
+end;
+---------------------------------------------------
+
+Q:-2:- take input from user when the input is less then zero then raise an exception.
+set serveroutput on;
+declare
+x number;
+negative_alert exception;
+begin
+x:=&x;
+if x<0 then
+raise negative_alert;
+end if;
+exception
+when negative_alert then
+dbms_output.put_line('Please enter positive number!');
+end; 
+---------------------------------------------------------------------
+Ques:-3: Raise exception if user name start from 'A'?
+
+set serveroutput on;
+declare
+v_name nvarchar2(20);
+start_A exception;
+begin
+select name into v_name from emp10 where id=4;
+if v_name LIKE 'a%' then
+raise start_A;
+end if;
+exception
+when start_A then
+dbms_output.put_line('The name must not start with a');
+update emp10 set name='harish' where id=2;
+end;
+/
+
+--------------------------------------------------------------
+Ques:-4:- Raise exception if employee's salary is in range of 0-500, it should display "too low salary" and increment the salary by 1000?
+set serveroutput on;
+declare 
+v_sal number;
+low_salary exception;
+begin
+select salary into v_sal from emp10 where id=3;
+if v_sal between 0 and 500 then
+raise low_salary;
+end if;
+exception
+when low_salary then 
+dbms_output.put_line('Too low salary');
+update emp10 set salary=salary+100 where id=3;
+end;
+/
+
+how to use the for loop ... homework
+
+
+------------------------------------------------------------------
+Ques:-5 :- Raise exception in the program, no name should end with 'i', second exception is no name should start from a lowercase letter.
+set serveroutput on;
+declare 
+s_name nvarchar2(20);
+s_start exception;
+begin
+select name into s_name from emp10 where id=2;
+if s_name like '%i' then
+raise s_start;
+end if;
+exception
+when s_start then
+dbms_output.put_line('The name should not end with i');
+end;
+/
+
+
+
+not working properly
+
+select * from emp10;
+set serveroutput on;
+declare 
+s_name nvarchar2(20);
+s_start exception;
+l_name nvarchar2(20);
+lower_start exception;
+begin
+select name into s_name from emp10 where id=2;
+if s_name like '%i' then
+raise s_start;
+end if;
+
+select name into l_name from emp10 where id=2;
+if l_name lower() then
+raise lower_start;
+end if;
+
+exception
+when s_start then
+dbms_output.put_line('The name should not end with i');
+when lower_start then
+dbms_output.put_line('The name should not be start from lower letter');
+end;
+/
+
+------------------------------------------------------------------------------------------
+
+Ques:- 1:- wap to raise exception by fetching salary from employee table,
+	excep:1: salary range 0-5000) too low
+	excep:2: salary range 50000-80000) too high
+any other- program not working.   
+(when other)
+
+set serveroutput on;
+declare
+l_sal number;
+sal_low exception;
+
+
+sal_high exception;
+begin
+
+select salary into l_sal from emp10 where id=&id;
+if l_sal between 0 and 5000 then
+raise sal_low;
+end if;
+ 
+if L_sal between 50000 and 80000 then
+raise sal_high;
+end if;
+
+exception
+when sal_low then
+dbms_output.put_line('The salary is too low');
+when sal_high then
+dbms_output.put_line('The salary is too high');
+when others then
+dbms_output.put_line('Program not working');
+end;
+/
+
+select * from emp10;
+
+-----------------------------------------------------------------------------------------
+
+Ques:2:- program to implement the following exception:
+	1) Too_many_rows		2) Case-not_found		3) No_data_found 	4) Rowtype_mismatch	5) Zero_divide.
+
+
+
+
+
+
+
+----------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

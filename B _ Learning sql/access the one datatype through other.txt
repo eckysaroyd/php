@@ -1,0 +1,14 @@
+
+
+
+set serveroutput on;
+DECLARE
+type t_name is record(
+first_name record.name%type);
+r_name t_name;
+n_rec_id record.id%type:=5;
+BEGIN
+select name into r_name from record where id=n_rec_id;
+dbms_output.put_line(r_name.first_name);
+END;
+/

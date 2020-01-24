@@ -1,0 +1,78 @@
+Q:1- consider a pl/sql code to display id,name,empjob of those employees whose salary is in the range 20000-30000?
+set serveroutput on;
+declare 
+cursor c1 is select * from employee where salary between 20000 and 30000;
+rec c1%rowtype;
+begin
+open c1;
+loop
+fetch c1 into rec;
+exit when c1%notfound;
+dbms_output.put_line(' EmpID: ' || rec.empid);
+dbms_output.put_line('Emp Name: ' || rec.empname);
+dbms_output.put_line('Emp Job: ' || rec.empjob);
+dbms_output.put_line('Department: ' || rec.empdept);
+dbms_output.put_line('Salary : ' || rec.salary);
+end loop;
+close c1;
+end;
+
+
+
+
+
+
+---------------------------------------------------------------------------
+2- whose salary is greater then 15000 and name has second letter as 'a' and last as 'n'?
+
+select * from employee;
+declare 
+cursor c1 is select * from employee where salary>15000 and empname like '_a%n';
+rec c1%rowtype;
+begin 
+open c1;
+loop
+fetch c1 into rec;
+exit when c1%notfound;
+dbms_output.put_line(' EmpID: ' || rec.empid);
+dbms_output.put_line('Emp Name: ' || rec.empname);
+dbms_output.put_line('Emp Job: ' || rec.empjob);
+dbms_output.put_line('Department: ' || rec.empdept);
+dbms_output.put_line('Salary : ' || rec.salary);
+end loop;
+close c1;
+end;
+-----------------------------------------------------------------------------------------
+3- consider a pl/sql code to calculate total marks & percentage of marks of students in 4 subject from table, which has structure like: result(rno,s1,s2,s3,s4,total,percentage)
+create table result.
+
+create table result123(rno number,s1 number,s2,number,s3,number,s4 number);
+select * from result123;
+insert into result123 values(1183, 60,76,85,93);
+insert into result123 values(1184, 74,62,87,65);
+insert into result123 values(1185, 81,80,75,90);
+insert into result123 values(1186, 68,70,75,88);
+
+
+
+declare
+totl number(28);
+per number(28);
+cursor c1 is select * from result123;
+rec c1%rowtype;
+begin
+loop fetch c1 into rec;
+exit when c1%notfound;
+totl:=rec.s1+rec.s2+rec.s3+rec.s4;
+per:=total/4;
+update result123 set total=totl,perc=per where rno=rec.rno;
+end loop;
+close c1;
+end;
+select * from result123;
+
+
+
+
+
+

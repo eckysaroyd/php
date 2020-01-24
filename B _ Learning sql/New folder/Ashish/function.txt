@@ -1,0 +1,70 @@
+/*COUNT THE NUMBER OF ROWS OF TABLE*/
+select * from emp;
+create or replace function funcount
+return number is
+total number(2):=0;
+begin
+select count(*) into total
+from emp;
+return total;
+end;
+
+set serveroutput on;
+
+declare
+c number;
+begin
+c:=funcount();
+dbms_output.put_line(c);
+end;
+************************************************************************************
+/* create a function to return the maximum salary from the table*/
+
+
+create table recordtable(name  varchar(100), id int, roll int , salary int);
+insert into recordtable values('ashish jha' ,101, 1,1000);
+insert into recordtable values('jeet wasti' ,102, 2,1100);
+insert into recordtable values('apoorv srivastava' ,103, 3,1200);
+insert into recordtable values('krishna tiwari' ,104, 2,1300);
+insert into recordtable values('naga babu' ,105, 2,1400);
+
+create or replace function funmax
+return number is
+max_sal number;
+begin
+select max(salary) into max_sal 
+from recordtable;
+return max_sal;
+end;
+
+set serveroutput on;
+declare
+getmaxsal number;
+begin
+getmaxsal :=funmax();
+dbms_output.put_line('MAXIMUM SALARY IS'||getmaxsal);
+
+end;
+
+*************************************************************************************
+/* CREATE A FUNCTION TO FIND THE SECOND LOWEST SALARY FROM THE TABLE*/
+
+create or replace function secondlowest1
+return number is
+minsal number;
+begin
+select min(salary)  into minsal from recordtable where salary >(select min(salary) from recordtable) ;
+return minsal;
+end;
+
+
+set serveroutput on;
+declare
+getmin number;
+begin
+getmin :=secondlowest();
+dbms_output.put_line('MAXIMUM SALARY IS'||getmin);
+end;
+
+***********************************************************************************
+/*CRAETE A FUNCTION TO CHECK WEATHER A NUMBER IS  PALINDROME OR NOT*/

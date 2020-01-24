@@ -1,0 +1,224 @@
+DATE 1 August 2019
+
+addition of 5 numbers and average?
+set serveroutput on;
+declare
+  a number;
+  b number;
+  c number;
+  d number;
+  e number;
+  sm number;
+  av number;
+Begin
+  a:=&Enter_a;
+  b:=&Enter_b;
+  c:=&Enter_c;
+  d:=&Enter_d;
+  e:=&Enter_e;
+  sm:=a+b+c+d+e;
+  av:=sm/5;
+  dbms_output.put_line('the sum is '||sm);
+  dbms_output.put_line('the average is '||av);
+End;
+
+
+
+===================================================================================================================
+find greatest number between 3 numbers?
+
+set serveroutput on;
+declare
+  a number;
+  b number;
+  c number;
+Begin
+  a:=&Enter_a;
+  b:=&Enter_b;
+  c:=&Enter_c;
+  if a>b and a>c then
+     dbms_output.put_line(a||'  is greater');
+  elsif b>a and b>c then
+     dbms_output.put_line(b||'  is greater');
+  else
+     dbms_output.put_line(c||'  is greater');
+  End if;
+End;
+
+
+=====================================================================================================================
+
+for positive and negative number?
+
+set serveroutput on;
+declare
+  a number;
+  Begin
+  a:=&Enter_a;
+  
+  if a>0 then
+     dbms_output.put_line(a||'  is positive');
+  elsif a<0 then
+     dbms_output.put_line(a||'  is negative');
+  else
+     dbms_output.put_line(a||'  is Zero');
+  End if;
+End;
+
+
+=======================================================================================================================
+
+number divide by 4 and 6?
+
+set serveroutput on;
+declare
+  a number;
+  Begin
+  a:=&Enter_a;
+  
+  if a mod 4=0 and a mod 6=0 then
+     dbms_output.put_line(a||'  is divided by 4 and 6');
+  else
+     dbms_output.put_line(a||'  is not divided of 4 and 6');
+  End if;
+End;
+
+========================================================================================================================
+
+if even or odd
+
+set serveroutput on;
+declare
+  a number;
+  Begin
+  a:=&Enter_a;
+  
+  if a mod 2=0 then
+     dbms_output.put_line(a||'  is Even');
+  else
+     dbms_output.put_line(a||'  is Odd');
+  End if;
+End;
+
+========================================================================================================================
+
+get no of days and print the respective day
+
+
+set serveroutput on;
+declare
+  a number;
+  Begin
+  a:=&Enter_a;
+  
+  if a=1 then
+     dbms_output.put_line(' Sunday');
+  elsif a=2 then
+     dbms_output.put_line(' Monday');
+  elsif a=3 then
+     dbms_output.put_line(' Tuesday');
+  elsif a=4 then
+     dbms_output.put_line(' Thursday');
+  elsif a=5 then
+     dbms_output.put_line(' Friday');
+  elsif a=6 then
+     dbms_output.put_line(' Saturday');
+  else
+     dbms_output.put_line('Invalid Choice...Enter only from 1 to 7');
+  End if;
+End;
+
+=========================================================================================================================
+
+swap 2 variable without 3rd variable;
+
+set serveroutput on;
+declare
+  a number;
+  b number;
+  Begin
+  a:=&Enter_a;
+  b:=&Enter_b;
+  
+  dbms_output.put_line('Old value of a   '||a);
+  dbms_output.put_line('Old value of b   '||b);
+  
+  a:=a+b;
+  b:=a-b;
+  a:=a-b;
+
+  dbms_output.put_line('New value of a   '||a);
+  dbms_output.put_line('New value of b   '||b);
+End;
+
+========================================================================================================================
+
+set serveroutput on;
+declare
+  a number;
+  b number;
+
+  Begin
+
+  a:=&Enter_a;
+  b:=&Enter_b;
+  
+  
+     
+    declare
+
+       c number;
+       d number;
+
+    Begin
+       
+       c:=&Enter_c;
+       d:=&Enter_d;
+
+       dbms_output.put_line('value of c   '||c);
+       dbms_output.put_line('value of d   '||d);
+
+    End;
+  dbms_output.put_line('value of a   '||a);
+  dbms_output.put_line('value of b   '||b);
+End;
+
+==========================================================================================================================
+
+get the marks of a student and give the grade
+
+set serveroutput on;
+declare
+
+  a number;
+  g varchar(30);
+  
+begin
+
+  a:=&Enter_the_mark_of_student;
+
+  if a>=35 and a<40 then
+    g:='D';
+
+  elsif a>=40 and a<60 then
+    g:='C';
+
+  elsif a>=60 and a<80 then
+    g:='B';
+
+  elsif a>=80 and a<90 then
+    g:='B+';
+
+  elsif a>=90 and a<101 then
+    g:='A+';
+
+  else
+    g:='R';
+
+end if;
+
+dbms_output.put_line('Remarks of student is  '||g);
+
+end;
+
+============================================================================================================================================

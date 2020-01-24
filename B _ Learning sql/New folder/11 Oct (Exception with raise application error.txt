@@ -1,0 +1,36 @@
+				Raise Application Error.
+
+Ques:- Error numbers are defined between -20,000 and -20,999.
+	The message can be anything that will fit in a varchar2(2000).
+
+set serveroutput on;
+declare
+balance integer :=24;
+begin
+if(balance <=100) then
+Raise_Application_Error(-20343, 'The balance is too low.');
+end if;
+end;
+/
+
+-------------------------------------------------------------------------------
+Ques:2:- create the procedure and raise an application error?
+
+create or replace procedure test_var
+(n_test in number := 0, n_result out number)
+is 
+begin
+if n_test > 100 then
+raise_application_error(-20010,'Number too large');
+end if;
+n_result := n_test;
+end;
+
+set serveroutput on;
+declare
+n_number number := &number;
+n_2 number :=0;
+begin
+test_var(n_numb, n_2);
+dbms_output.put_line(n_2);
+end; 

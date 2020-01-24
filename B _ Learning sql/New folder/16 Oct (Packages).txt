@@ -1,0 +1,72 @@
+		Packages:
+a package is a group of related pl/sql object(variables..) procedures, and function.
+two parts:
+a) package specification: package name and what my package have.
+b) package body (is the place where you actually applied the logic).
+
+example 1:-
+
+create package emp_sal as
+procedure find_sal(e_id employee.id%type);
+end emp_sal;
+/
+
+create or replace package body emp_sal as 
+procedure find_sal(e_id employee.id%type) is
+e_sal employee.salary%type;
+begin 
+select salary into e_sal from employee where id=e_id;
+dbms_output.put_line('Salary : ' || e_sal);
+end find_sal;
+end emp_sal;
+/
+
+
+declare 
+code employee.id%type :=&ee_id;
+begin 
+emp_sal.find_sal(code);
+end;
+/
+
+-------------------------------------------------------------------
+Ques:- for employee table, create a package consisting of:
+	a) function increment the salary (increment salary of entered id)
+	b) procedure Name display ( display name of employee along with no of character).
+
+create  package emp_sal as
+function sal_increment(e_id employee.id%type);
+procedure name_display(
+
+
+
+------------------------------------------------------------------------------------------
+Ques:- 3 :- create a package containing:
+	a) create a procedure calc_salary() fetch salary from employee table if salary is >500,  increment it by 1000.
+	b) Basic_info() display basic info of employee, taking empid as arguments.
+	c) excep_name() pass empid of employee & check if name starts from 'T' raise exception. (only in package body).
+
+
+
+create or replace function tot_salary
+return number is
+total number :=0;
+begin
+select salary into total from employee;
+if total>5000 then
+update employee set salary=salary+300 where id=3;
+end if;
+return total;
+end;
+
+b) use in the program and call it.
+
+declare
+total_salary number;
+begin
+if total>5000 then
+total_salary := tot_salary();
+dbms_output.put_line('The  salary is : ' || total_salary);
+end;
+
+ 

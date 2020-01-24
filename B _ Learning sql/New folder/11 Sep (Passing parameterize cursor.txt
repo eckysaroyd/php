@@ -1,0 +1,31 @@
+Q:- Write a pl/sql code to calculate total salary of first n records of employee table. the value n is passed to cursor as parameter?
+
+create table emp(empid number, empname varchar2(20),empjob varchar(20), empdept number,salary number);
+
+insert into emp values(1,'Karan','Manager', 2,10000);
+insert into emp values(2,'Amrit','Accountant', 4,12000);
+insert into emp values(3,'Harish','Manager', 2,15000);
+insert into emp values(4,'RP','IT officer',6,6000);
+insert into emp values(5,'Mohsin','Accountant', 4,20000);
+insert into emp values(6,'Ahmad','Manager', 2,25000);
+insert into emp values(7,'Atiq','IT officer', 6,28000);
+insert into emp values(8,'Faredon','Accountant',4,35000);
+
+
+select * from emp;
+
+set serveroutput on;
+declare
+e number (5);
+s number (5):=0;
+cursor c1 (n number) is select salary from emp where rownum<=n;
+begin
+open c1(&n);
+loop
+fetch c1 into e;
+exit when c1%notfound;
+s:=s+e;
+end loop;
+dbms_output.put_line(s);
+close c1;
+end;

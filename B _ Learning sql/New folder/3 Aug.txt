@@ -1,0 +1,71 @@
+Fibonacci Series
+
+declare
+  a number:=0;
+  b number:=1;
+  c number;
+  l number;
+begin
+  l:=:Enter_the_limit;
+  dbms_output.put_line(a);
+  dbms_output.put_line(b);
+  c:=a+b;
+  while (c<=l)
+  loop
+   dbms_output.put_line(c||' ');
+   a:=b;
+   b:=c;
+   c:=a+b;
+  end loop;
+end;
+
+==================================================================================================
+
+Armstrong Number
+
+declare
+  a number;
+  sm number:=0;
+  d number;
+  org number;
+begin
+  a:=:Enter_the_number;
+  org:=a;
+  while(a!=0)
+  loop
+    d:=a mod 10;
+    sm:=sm + (d*d*d);
+    a:=trunc(a/10);
+  end loop;
+  if (org=sm) then
+    dbms_output.put_line(sm||' is Armstrong');
+  else
+    dbms_output.put_line(sm||' is not Armstrong');
+  end if;
+end;
+
+====================================================================================================
+
+Prime numbers between 1  to  50
+
+declare
+  f number:=0;
+begin
+  
+  for i in 1..50
+  loop
+     f:=0;
+     for j in 1..i
+     loop
+        if (i mod j)=0 then
+        f:=f+1;
+        end if;
+     end loop;
+     if(f=2) then
+        dbms_output.put_line(i);
+     end if;
+  end loop;
+end;
+
+
+====================================================================================================

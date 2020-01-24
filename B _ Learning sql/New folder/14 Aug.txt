@@ -1,0 +1,71 @@
+associative array to  store the values and print it
+
+set serveroutput on
+declare
+  TYPE names_at IS TABLE OF NUMBER INDEX BY varchar2(100);
+  v_names names_at;
+begin
+  v_names('alok'):=85;
+  v_names('chan'):=87;
+  v_names('rahul'):=95;
+  dbms_output.put_line('Alok marks '||v_names('alok'));
+end; 
+
+==========================================================================================================================
+
+associative array using collections method
+
+set serveroutput on
+declare
+
+  TYPE salary IS TABLE OF NUMBER INDEX BY varchar2(20);
+  salary_list salary;
+  name varchar2(20);
+
+begin
+
+  salary_list('alok'):=85000;
+  salary_list('chan'):=87000;
+  salary_list('rahul'):=95000;
+
+  name:=salary_list.FIRST;
+  while name IS NOT null LOOP
+  dbms_output.put_line('Salary of  '||name||' is  '||salary_list(name));
+  name:=salary_list.NEXT(name);
+  END LOOP;
+
+end; 
+
+==========================================================================================================================
+
+Find the largest value from associative array of 5 elements
+
+set serveroutput on
+declare
+
+  TYPE salary IS TABLE OF NUMBER INDEX BY varchar2(20);
+  salary_list salary;
+  name varchar2(20);
+  mx number;
+
+begin
+
+  salary_list('alok'):=85000;
+  salary_list('chan'):=87000;
+  salary_list('rahul'):=95000;
+
+  
+  name:=salary_list.FIRST;
+  mx:=salary_list(name);
+  while name IS NOT null LOOP
+  if mx < salary_list(name) then
+  mx:=salary_list(name);
+  end if;
+  dbms_output.put_line('Salary of  '||name||' is  '||salary_list(name));
+  name:=salary_list.NEXT(name);
+  END LOOP;
+  dbms_output.put_line('max is '||mx);
+
+end; 
+==========================================================================================================================
+

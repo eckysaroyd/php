@@ -1,0 +1,36 @@
+//this is the userdefine to fetch the records which is entered by the student.
+
+set serveroutput on;
+
+DECLARE
+type college is record
+(FirstName varchar(50),
+LastName varchar(50),
+Subject varchar(100),
+Reg_id number);
+course1 college;
+course2 college;
+
+BEGIN
+course1.FirstName :='Ruby';
+course1.LastName := 'Sharma';
+course1.Subject :='C Programming';
+course1.Reg_id := 11815937;
+
+course2.FirstName :='Harman';
+course2.LastName := 'Sing';
+course2.Subject :='C ++';
+course2.Reg_id := 11816044;
+
+dbms_output.put_line('Firstname : '|| course1.firstname);
+dbms_output.put_line('Lastname : '|| course1.lastname);
+dbms_output.put_line('Subject : '|| course1.subject);
+dbms_output.put_line('Registration ID : '|| course1.reg_id);
+
+dbms_output.put_line('Firstname : '|| course2.firstname);
+dbms_output.put_line('Lastname : '|| course2.lastname);
+dbms_output.put_line('Subject : '|| course2.subject);
+dbms_output.put_line('Registration ID : '|| course2.reg_id);
+
+END;
+/

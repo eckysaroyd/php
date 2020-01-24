@@ -1,0 +1,22 @@
+5. Declaration of nested arrays.
+
+set serveroutput on;
+
+DECLARE
+
+type names_table is table of varchar2(10);
+type grades is table of integer;
+names names_table;
+marks grades;
+total integer;
+BEGIN
+names := names_table('kavita','Pritam','Ayan','Rishav','Aziz');
+marks:=grades(98,97,78,87,92);
+total:=names.count;
+dbms_output.put_line('Total' || total || 'Students');
+FOR i I 1 .. total LOOP
+dbms_output.put_line('Student:' || names(i) || ', Marks:' || marks(i));
+end LOOP;
+END;
+/
+

@@ -1,0 +1,49 @@
+			Exceptions:
+the way to handle the run time error in pl/sql we use exceptions.
+three types:
+	1- Named Exceptions.
+example:- this program is used the name exception it is used when no record is found or some errore was there.
+
+create table employee(id number, name nvarchar2(20),age number,salary number);
+insert into employee values(1,'ahmad',18,10000);
+insert into employee values(2,'karan',20,12000);
+insert into employee values(3,'harish',21,15000);
+insert into employee values(4,'ankit',22,18000); 
+
+
+set serveroutput on;
+declare
+e_id employee.id%type :=9;
+e_name employee.name%type;
+begin
+select name into e_name from employee where id=e_id;
+dbms_output.put_line('Name: ' || e_name);
+
+EXCEPTION
+when no_data_found then
+dbms_output.put_line('No such customer!');
+when others then
+dbms_output.put_line('Error!');
+end;
+
+------------------------------------------------------------------------
+
+example:2:
+
+this program is used to take the input from user first any number and the second is 0 input then it shows that the number is not divide by 0.
+when this example is executed with values of 4 and 0 for variables v_num1 and v_num2.
+
+declare 
+v_num1 integer:=&sv_num1;
+v_num2 integer:=&sv_num2;
+v_result number;
+begin
+v_result:=v_num1/v_num2;
+dbms_output.put_line('v_result : ' || v_result);
+
+EXCEPTION
+when zero_divide
+then
+dbms_output.put_line('A number cannot be divided by zero.');
+end;
+

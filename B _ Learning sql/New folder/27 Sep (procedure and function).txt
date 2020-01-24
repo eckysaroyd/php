@@ -1,0 +1,112 @@
+procedure and function:- are the same as other function.
+it is a block of code which we can use and call many times?
+types of procedure?
+a) at the schema level
+b) inside a package
+c) inside a PL/SQL block (it called local procedure)
+
+
+example:
+set serveroutput on;
+create or replace procedure welcome_msg(p_name IN varchar2) 
+IS
+BEGIN
+dbms_output.put_line('Welcome ' || p_name);
+end;
+
+
+begin
+welcome_msg('To LPU');
+end;
+--------------------------------------------------------
+Que:-1:- create a procedure to perform basic arthmetic calculation?
+set serveroutput on;
+create or replace procedure addition(x in number,y in number)
+is
+begin
+dbms_output.put_line(x+y);
+end;
+
+
+begin
+addition(10,20);
+end;
+
+------------------------------------
+Ques:2:- create a procedure to find minimum of 3 number passed as parameters?
+set serveroutput on;
+create or replace procedure mynum(x in number, y in number, z in number , res out number)
+is
+begin
+if x<y and x<z then
+res:=x;
+end if;
+if y<x and y<z then
+res:=y;
+end if;
+if z<x and z<y then
+res:=z;
+end if;
+
+end;
+
+
+set serveroutput on;
+declare
+res number
+begin
+mynum(5,10,15,res);
+dbms_output.put_line('The minimum number is = ' || res);
+end;
+------------------------------------------------------------------------
+Ques:-3:- Create a procedure which should take input of an empid, & permanently fire that employee from the company?
+create table emp(id number, name nvarchar2(20),city nvarchar2(20));
+insert into emp values(1,'Karan','chandigarh');
+insert into emp values(2,'Ahmad','jalandhar');
+insert into emp values(3,'Harish','delhi');
+
+
+create or replace procedure fire(empid in number)
+as
+begin
+delete from emp where id=empid;
+end;
+
+set serveroutput on;
+declare 
+id number:=&id;
+begin
+fire(id);
+end;
+
+
+----------------------------------------------------------------------------------------------
+Ques:-4:- create a procedure which should increment the salary of employee if he is an even numbered employee?
+
+create procedure fire12(empid in int)
+as
+begin
+for i in 1..10
+loop
+if i mod 2=0
+then
+update employee set salary=salary+100
+where id=i;
+end if;
+end loop;
+end;
+
+select * from employee;
+declare
+nid number:=&nid;
+begin
+fire12(nid);
+end;
+/
+----------------------------------------------------------------------------------------------------
+Ques:-5:- create a procedure to perform calculation of total salary of an employee, provided basic pay is 
+(10000, T.A is 10% &  D.A is 15%, store it in a table?
+
+
+
+

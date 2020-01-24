@@ -1,0 +1,100 @@
+Ques:- to count the total number of employees?
+
+a)create the function
+
+create or replace function totalemployee
+return number is
+total number(2) :=0;
+begin
+select count(*) into total from employee;
+return total;
+end;
+
+b) use in the program and call it.
+
+declare 
+c number(2);
+begin
+c := totalemployee();
+dbms_output.put_line('The total number of employees are : ' || c);
+end;
+
+
+-------------------------------------------------------------------------------
+Ques:-2 create a function in pl/sql which return back the maximum salary of an employee from employee?
+
+a) create the function.
+
+create or replace function maxsalary
+return number is
+Maximum number :=0;
+begin
+select max(salary) into Maximum from employee;
+return Maximum;
+end;
+
+b) use in the program and call it.
+
+declare
+max_salary number;
+begin
+max_salary := maxsalary();
+dbms_output.put_line('The Maximum salary is : ' || max_salary);
+end;
+
+-----------------------------------------------------------------------------
+Ques:- 3: create a function which should fetch the second lowest salary from table.
+
+a) create the function.
+
+create or replace function sec_lowsalary
+return number is
+sec_lowest number :=0;
+begin 
+select min(salary) into sec_lowest
+  from (select * from(select salary from employee)
+         where rownum < 2);
+return sec_lowest;
+end;
+
+b) use in the program and call it.
+declare
+second_lowest number;
+begin
+second_lowest := sec_lowsalary();
+dbms_output.put_line('Second Lowest salary is : ' || second_lowest);
+end;
+
+--------------------------------------------------------------------------------
+Ques:- 4: create a function to check if a number is palindrome or not, number should be passed as parameter?
+
+
+
+
+
+
+
+--------------------------------------------------------------------
+Ques:- 5: create a function for table student_result(rollno, marks_scored, name) which should be able to perform the following:
+user enter 
+1---> display average marks scored by class.
+2---> display total marks scored by class.
+3---> display the marks of student rollno. passed as on argument.
+
+create table student (rollno number, name nvarchar2(20), marks number);
+insert into student values(1,'Ahmad',80);
+insert into student values(2,'Karan',75);
+insert into student values(3,'Harish',90);
+insert into student values(4,'Mohsin',95);
+insert into student values(5,'Atiq',60);
+
+create or replace function input
+return number is 
+new_input number :=0;
+declare
+a number;
+b number;
+c number;
+begin
+
+

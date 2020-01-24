@@ -1,0 +1,101 @@
+
+/* CREATE  A STORE PROCEDURE AND DISPLAY IT*/
+create or replace procedure new_procedure(name in varchar2)
+is
+begin
+dbms_output.put_line('ASHISH KUMAR JHA ' || name);
+end; 
+
+set serveroutput on;
+begin
+new_procedure('  WELCOME TO PROCEDURE');
+end;
+***************************************************************************
+
+/* CREATE  A PROCEDURE TO PERFORM ARITHMETIC OPERATION */
+
+create or replace procedure prog(a in int, b in int ,result out int )
+is
+begin
+result:=a+b;
+end;
+
+set serveroutput on;
+declare
+a int;
+begin
+prog(10,20,a);
+dbms_output.put_line('RESULT : '|| a);
+end;
+****************************************************************************
+
+/*CREATE A PROCEDURE TO FIND THE MINIMUM OF THREE NUMBER PASSED ON PARAMETER*/
+
+create or replace procedure minimum12(a in int, b in int ,c in int ,result out int )
+is
+begin
+if a<b AND a<c
+then
+result:=a;
+end if;
+
+if b<a AND b<c
+then
+result:=b;
+end if;
+
+
+if c<a AND c<b
+then
+result:=c;
+end if;
+
+end;
+
+declare
+res int;
+begin
+minimum12(10,2,78, res);
+dbms_output.put_line('MINIMUM NUMBER AMONG THEM IS :' || res);
+end;
+
+***********************************************************************************
+/* CREATE PROCEDURE WHICH SHOULD TAKE INPUT OF AN EMPIF , & PERMANENTLY DELETE THAT  FROM TABLE*/
+
+
+create procedure fire(empid in int)
+as
+begin
+delete from employee
+where id=empid;
+end;
+
+declare
+id int:=&id;
+begin
+fire(id);
+end;
+****************************************************************************************************************************
+/* CREATE A PROCEDURE WHICH SHOULD INCRE<MENT THE SALARY  OF EMPLOYEE ID HE IS AN EVEN NO EMPLOYEE*/
+
+create procedure fire12(empid in int)
+as
+begin
+for i in 1..10
+loop
+if i mod 2=0
+then
+update employee set salary=salary+100
+where id=i;
+end if;
+end loop;
+end;
+
+select * from employee;
+declare
+nid number:=&nid;
+begin
+fire12(nid);
+end;
+/
+select * from employee;

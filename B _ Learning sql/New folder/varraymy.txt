@@ -1,0 +1,16 @@
+declare
+type namesarray is varray(5) of varchar2(10);
+type grades is varray(5) of integer;
+names namesarray;
+marks grades;
+total integer;
+begin
+names:=namesarray(' Karan ', 'Pranam' , 'Harish' , 'Amrith', 'Ankit');
+marks:=grades(90,92,93,94,95);
+total:=names.count;
+dbms_output.put_line('Total ' || total || ' Students');
+for i in 1..total loop
+dbms_output.put_line('Student : ' || names(i) || ' Marks : ' || marks(i));
+end loop;
+end;
+/
